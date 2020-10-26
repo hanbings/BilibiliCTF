@@ -25,15 +25,19 @@ def fuck(flag, ws,ctf_is):
         'Referer': ' https://security.bilibili.com/sec1024/',
         'Accept-Encoding': ' gzip, deflate, br',
         'Accept-Language': ' zh-CN,zh;q=0.9',
-        'Cookie': ''
+        'Cookie': ""
     }
     conn.request("POST", "/sec1024/api/v1/flag", payload, headers)
     res = conn.getresponse()
     data = res.read()
     if data.decode("utf-8").find("Flag错误，请继续努力") == -1:
-        print(data.decode("utf-8") + " " + payload)
-        ws.send(data.decode("utf-8") + " 这是破解成功了？" + payload)
-        exit()
+        if data.decode("utf-8").find("请勿频繁提交") == -1:
+            print(data.decode("utf-8") + " " + payload)
+            ws.send(data.decode("utf-8") + " 这是破解成功了？" + payload)
+            exit()
+        else:
+            time.sleep(5)
+            print(data.decode("utf-8") + " " + payload)
     else:
         print(data.decode("utf-8") + " " + payload)
 
