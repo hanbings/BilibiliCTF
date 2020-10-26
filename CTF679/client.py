@@ -25,7 +25,7 @@ def fuck(flag, ws,ctf_is):
         'Referer': ' https://security.bilibili.com/sec1024/',
         'Accept-Encoding': ' gzip, deflate, br',
         'Accept-Language': ' zh-CN,zh;q=0.9',
-        'Cookie': ''
+        'Cookie': ""
     }
     conn.request("POST", "/sec1024/api/v1/flag", payload, headers)
     res = conn.getresponse()
