@@ -31,9 +31,13 @@ def fuck(flag, ws,ctf_is):
     res = conn.getresponse()
     data = res.read()
     if data.decode("utf-8").find("Flag错误，请继续努力") == -1:
-        print(data.decode("utf-8") + " " + payload)
-        ws.send(data.decode("utf-8") + " 这是破解成功了？" + payload)
-        exit()
+        if data.decode("utf-8").find("请勿频繁提交") == -1:
+            print(data.decode("utf-8") + " " + payload)
+            ws.send(data.decode("utf-8") + " 这是破解成功了？" + payload)
+            exit()
+        else:
+            time.sleep(5)
+            print(data.decode("utf-8") + " " + payload)
     else:
         print(data.decode("utf-8") + " " + payload)
 
